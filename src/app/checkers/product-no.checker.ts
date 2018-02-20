@@ -3,16 +3,18 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProductNoChecker {
   check(productNo: number): boolean {
-    let result = false;
-
-    if (Number.isInteger(productNo)) {
-      if ((productNo % 2) === 0) {
-        if ((productNo % 3) === 0) {
-          result = true;
-        }
-      }
+    if (!Number.isInteger(productNo)) {
+      return false;
     }
 
-    return result;
+    if (productNo % 2) {
+      return false;
+    }
+
+    if (productNo % 3) {
+      return false;
+    }
+
+    return true;
   }
 }
