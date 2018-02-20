@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
+import { IntegerChecker } from './integer.checker';
+import { CheckerInterface } from './checker.interface';
+import { DoubleChecker } from './double.checker';
+import { TripleChecker } from './triple.checker';
 
 @Injectable()
 export class ProductNoChecker {
   check(productNo: number): boolean {
-    if (!Number.isInteger(productNo)) {
-      return false;
-    }
+    const checker: CheckerInterface = new IntegerChecker();
 
-    if (productNo % 2) {
-      return false;
-    }
+    checker
+      .setNextChecker(new DoubleChecker())
+      .setNextChecker(new TripleChecker());
 
-    if (productNo % 3) {
-      return false;
-    }
-
-    return true;
+    return checker.check(productNo);
   }
 }
