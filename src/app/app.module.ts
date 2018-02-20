@@ -1,9 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-
-import { AppComponent } from './app.component';
-
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {AppComponent} from "./app.component";
+import {ProductNoChecker} from "./checkers/product-no.checker";
 
 @NgModule({
   declarations: [
@@ -12,7 +10,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    ProductNoChecker
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
