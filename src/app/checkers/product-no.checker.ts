@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { IntegerChecker } from './integer.checker';
 import { CheckerInterface } from './checker.interface';
-import { DoubleChecker } from './double.checker';
-import { TripleChecker } from './triple.checker';
+import { integerCheck } from './integer.checker';
+import { doubleCheck } from './double.checker';
+import { tripleCheck } from './triple.checker';
 
 @Injectable()
 export class ProductNoChecker {
+  checkers: CheckerInterface[];
+
+  constructor() {
+    this.checkers = [
+      integerCheck,
+      doubleCheck,
+      tripleCheck
+    ];
+  }
+
   check(productNo: number): boolean {
-    const checker: CheckerInterface = new IntegerChecker();
-
-    checker
-      .setNextChecker(new DoubleChecker())
-      .setNextChecker(new TripleChecker());
-
-    return checker.check(productNo);
+    return this.checkers.every(checker => checker(productNo));
   }
 }
