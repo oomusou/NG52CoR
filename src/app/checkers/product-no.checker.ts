@@ -17,6 +17,10 @@ export class ProductNoChecker {
   }
 
   check(productNo: number): boolean {
-    return this.checkers.every(checker => checker(productNo));
+    Array.prototype.any = function(fn) {
+      return !this.some(item => !fn(item));
+    };
+
+    return this.checkers.any(checker => checker(productNo));
   }
 }
